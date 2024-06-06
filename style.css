@@ -1,0 +1,130 @@
+/*  // La syntaxe Scss est très proche de la syntaxe CSS. Pour écrire en SCSS il vous suffit 
+d'imbriquer les éléments comme vous le feriez en HTML.*/
+/* 1👥 */
+/* mon bloc */
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    }
+
+    .navbar__link {
+        margin-left: 30px;
+        color: #242424;
+        text-decoration: none;
+      }
+
+     /* 2 mon modificateur d'éléments */ 
+
+     🚗.navbar__link--purple {
+        color: #a5b4fc;
+     }
+   
+   /* 3 je prends mon modificateur d'éléments pour le nester à navbar__link */
+
+   .navbar__link {
+    margin-left: 30px;
+    color: #242424;
+    text-decoration: none;
+    🚗.navbar__link--purple {
+        color: #a5b4fc;
+     }
+   
+  }
+/* la couleur de ma navbar a disparu en nestant navbar__link
+avec le modificateur🚗.navbar__link--purple directement dans l'élément
+je viens d'augmenter la spécificité des class et id ce qui viens de dérégler
+tout le systéme de score.
+Mais je veux absolument concaténer ces 2 éléments 
+Ce qui me donne actuellement comme sélecteurs et sa augmente beaucoup
+la spécificité ce qui addition les selecteurs entre eux*/
+
+.navbar .navbar__link .navbar__link--purple{
+
+    color: #242424;
+
+}
+
+/* on veux que notre modificateur soit lié à notre élément
+pour combattre toutes ces régles qui sont en train de se surppassé
+les uns aux autres on va exécuter la technique qui s'appelle
+l'esperluette &/
+ 4 je vais concaténer 2 sélecteurs*/
+
+
+ /* AVANT */
+.navbar__link {
+    margin-left: 30px;
+    color: #242424;
+    text-decoration: none;
+    🚗.navbar__link--purple {
+        color: #a5b4fc;
+     }
+   
+  }
+
+  
+ /* APRES  ce qui permet de remettre notre lien en violet et m'évite de créer de nouveaux sélecteur plus compliqués*/
+.navbar__link {
+    margin-left: 30px;
+    color: #242424;
+    text-decoration: none;
+    🚗&--purple {
+        color: #a5b4fc;
+     }
+   
+  }
+
+  /* Attention plus on neste plus on augmente les spécificités des sélecteurs 
+  donc je beaucoup de combinateurs descandant
+ combinateurs descandant = sélecteur d'éléments descendant
+ cela permet de sélectionner les éléments qui dépendent d'un sélecteur  */
+
+ /* EXEMPLE: */
+
+ .navbar a {}
+ /* combinateur descendant
+ parents > enfants
+ parce que je sélectionne tout les liens qui dépendent de la class navbar*/
+
+ .navbar a {
+/* je suis sur un combinateur descandant
+parce qu'il y un espace entre les 2 sélecteur
+a===>descendant de navbar */
+
+ }
+
+
+ /* combinateur parents enfants il prend un parent
+ et vont l'appliquer à tout ces enfants  avec le >
+ les liens parents div
+ a===> petits enfants de div*/
+
+ div > a {
+
+
+ }
+
+ /* pour mieux comprendre 
+ 
+  a est descendant de navbar 
+  et il est aussi enfant=====> de div*/
+
+
+  /* donc navbar est le grand parents
+  div est l'enfant
+  et a sont les petits enfants */
+
+  /* les combinateurs adjacents
+   La régle est si le deuxiéme élément précédés du premier alors cette éléments
+   correspondra en direct avec celui-ci*/
+
+   img + div {
+
+/* img est précédé de div dans ce cas la propriété CSS est appliqué */
+
+   }
+
+
